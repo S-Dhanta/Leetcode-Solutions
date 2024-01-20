@@ -17,6 +17,9 @@ class Solution {
                 count1++;
             if(list.contains(s.charAt(i+(s.length()/2))))
                 count2++;
+            
+            if(((count1-count2)>(((s.length()/2)-1)-i)) || ((count2-count1)>(((s.length()/2)-1)-i)))
+                return false;
         }
         if(count1 == count2)
             return true;
