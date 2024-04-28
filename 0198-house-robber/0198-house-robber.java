@@ -1,19 +1,23 @@
-class Solution {
-    public int rob(int[] nums) {
-        int l = nums.length;
-        if(l==1) return nums[0];
-        if(l==2) return Math.max(nums[0],nums[1]);
-        if(l==3) return Math.max(nums[0]+nums[2],nums[1]);
-        int[] res = new int[l];
-        res[0] = nums[0];
-        res[1] = nums[1];
-        res[2]= nums[0]+nums[2];
-        for(int i=3;i<l;i++)
-        {
-            res[i]= Math.max(res[i-2]+nums[i] , res[i-3]+nums[i]);
-        }
+import java.util.Arrays;
 
-        return Math.max(res[l-1],res[l-2]);
+class Solution {
+    int solve(int[] nums, int[] dp, int i){
+        //base case
+        if(i>=nums.length)
+            return 0;
+        if(dp[i] != -1)
+            return dp[i];
         
+        int a=nums[i] + solve(nums,dp,i+2);
+        int b=solve(nums,dp,i+1);
+        
+        dp[i]=Math.max(a,b);
+        return dp[i];
+    }
+    public int rob(int[] nums) {
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, -1);
+        
+        return Math.max(solve(nums,dp,0) , solve(nums,dp,1));
     }
 }
