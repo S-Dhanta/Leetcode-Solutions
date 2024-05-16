@@ -5,8 +5,7 @@ class Solution {
             if(prices[i] < buy)
                 buy=prices[i];
             if(prices[i]-buy > 0){
-                if(prices[i]-buy > max)
-                    max = prices[i] - buy;
+                max=Math.max(prices[i]-buy, max);
             }
         }
         
